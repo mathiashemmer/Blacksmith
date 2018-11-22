@@ -2,6 +2,7 @@
 #define WEAPONMATERIAL_H
 
 #include <QString>
+#include <QFile>
 
 #define MAX_QUALITY 5 // Update this value if more qualitys are added
 
@@ -17,12 +18,14 @@ private:
     MaterialQuality quality;
 
     QString materialName;
+    QString materialIconPath;
 public:
     WeaponMaterial();
     WeaponMaterial(MaterialType type, MaterialQuality quality, int price, QString name);
 
     static QString MapTypeToString(MaterialType t);
     static QString MapQualityToString(MaterialQuality q);
+    static int MapTypeToValue(MaterialType t);
 
     // Getters and Setters
     MaterialType getMyType() const;
@@ -33,6 +36,8 @@ public:
     void setMyPrice(int value);
     QString getMaterialName() const;
     void setMaterialName(const QString &value);
+    QString getMaterialIconPath() const;
+    void setMaterialIconPath(const QString &value);
 };
 
 #endif // WEAPONMATERIAL_H

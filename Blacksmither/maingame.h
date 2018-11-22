@@ -8,6 +8,7 @@
 #include <weapon.h>
 #include <weaponmaterial.h>
 #include <weapondesigner.h>
+#include <inventorymanager.h>
 
 namespace Ui {
 class MainGame;
@@ -23,11 +24,13 @@ public:
     explicit MainGame(QWidget *parent = nullptr);
     ~MainGame();
 
+   //Gatters and Setters
+
 private slots:
 
     void on_pushButton_NewTool_clicked();
-
     void on_pushButton_GetterMaterials_clicked();
+    void on_pushButton_Inventory_clicked();
 
 private:
     Ui::MainGame *ui;

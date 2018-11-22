@@ -30,18 +30,24 @@ SOURCES += \
     weapon.cpp \
     weaponmaterial.cpp \
     weapondesigner.cpp \
-    player.cpp
+    player.cpp \
+    inventorymanager.cpp \
+    materialanalizer.cpp
 
 HEADERS += \
         maingame.h \
     weapon.h \
     weaponmaterial.h \
     weapondesigner.h \
-    player.h
+    player.h \
+    inventorymanager.h \
+    materialanalizer.h
 
 FORMS += \
         maingame.ui \
-    weapondesigner.ui
+    weapondesigner.ui \
+    inventorymanager.ui \
+    materialanalizer.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

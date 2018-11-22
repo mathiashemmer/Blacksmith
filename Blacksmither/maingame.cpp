@@ -6,13 +6,13 @@ WeaponMaterial* GatherMaterials(int);
 
 MainGame::MainGame(QWidget *parent) :QMainWindow(parent),ui(new Ui::MainGame){
     ui->setupUi(this);
+    MainGame::showMaximized();
     mainPlayer = new Player();
 }
 
 MainGame::~MainGame(){
     delete ui;
 }
-
 
 void MainGame::on_pushButton_NewTool_clicked(){
     WeaponDesigner *DesignerWindow = new WeaponDesigner(this, mainPlayer);
@@ -46,6 +46,7 @@ WeaponMaterial* GatherMaterials(int gatherSkill){
                     (MaterialQuality)(rand() % 5 + 1),
                     25 * rand() % 6,
                     "Baga");
+        foundMaterial->setMaterialIconPath(":/ICO/Hammer.png");
         QMessageBox::warning(nullptr, "Found!", "You found a <b>" +
                              WeaponMaterial::MapQualityToString(foundMaterial->getQuality()) + " " +
                              WeaponMaterial::MapTypeToString(foundMaterial->getMyType()) + "</b>!It is in your bag to use!");
@@ -59,5 +60,11 @@ WeaponMaterial* GatherMaterials(int gatherSkill){
     }
     return foundMaterial;
 }
+// ========================================================================================== //
+// Inventory Manager code goes here                                                           //
+// ========================================================================================== //
 
-
+void MainGame::on_pushButton_Inventory_clicked(){
+    InventoryManager *invManager = new InventoryManager(this, this->mainPlayer);
+    invManager->exec();
+}

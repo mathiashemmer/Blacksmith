@@ -1,5 +1,15 @@
 #include "player.h"
 
+Weapon *Player::getEquipedWeapon() const
+{
+    return equipedWeapon;
+}
+
+void Player::setEquipedWeapon(Weapon *value)
+{
+    equipedWeapon = value;
+}
+
 Player::Player(){
     this->setPlayerMoney(0);
     this->setSkillGatherer(1);

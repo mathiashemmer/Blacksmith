@@ -40,13 +40,22 @@ void WeaponMaterial::setMaterialName(const QString &value)
     materialName = value;
 }
 
-WeaponMaterial::WeaponMaterial()
+QString WeaponMaterial::getMaterialIconPath() const
 {
-
+    return materialIconPath;
 }
 
-WeaponMaterial::WeaponMaterial(MaterialType type, MaterialQuality quality, int price, QString name)
+void WeaponMaterial::setMaterialIconPath(const QString &value)
 {
+    materialIconPath = value;
+}
+
+WeaponMaterial::WeaponMaterial()
+{
+    
+}
+
+WeaponMaterial::WeaponMaterial(MaterialType type, MaterialQuality quality, int price, QString name){
     this->setMyType(type);
     this->setQuality(quality);
     this->setMyPrice(price);
@@ -75,3 +84,4 @@ QString WeaponMaterial::MapQualityToString(MaterialQuality q){
     case 5: return "Pure";
     }
 }
+

@@ -13,6 +13,8 @@ private:
 
     QVector<Weapon*> weaponList;
     QVector<WeaponMaterial*> materialList;
+
+    Weapon *equipedWeapon;
 public:
     Player();
     int getPlayerMoney() const;
@@ -21,6 +23,8 @@ public:
     void setSkillGatherer(int value);
     QVector<Weapon *>* getWeaponList();
     QVector<WeaponMaterial *>* getMaterialList();
+    Weapon *getEquipedWeapon() const;
+    void setEquipedWeapon(Weapon *value);
 };
 
 #endif // PLAYER_H

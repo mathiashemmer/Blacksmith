@@ -30,6 +30,20 @@ void WeaponDesigner::FillFormWithMaterialSelection(int size){
     }
 }
 
+bool WeaponDesigner::ValidateSelectedMaterials(){
+    int matLenght = materialsCB.length();
+    if(matLenght <= 0)
+        return false;
+    for(int i = 0; i < matLenght; i++){
+        QComboBox *curCB = materialsCB.at(i);
+        for(int j = i+1; j < matLenght; j++){
+            if(curCB->currentIndex() == materialsCB.at(j)->currentIndex())
+                return false;
+        }
+    }
+    return true;
+}
+
 void WeaponDesigner::on_comboBox_currentIndexChanged(const QString &arg1)
 {
     int currWeaponType = ui->comboBox->currentIndex();
@@ -38,9 +52,12 @@ void WeaponDesigner::on_comboBox_currentIndexChanged(const QString &arg1)
 
 void WeaponDesigner::on_pushButton_Evaluate_clicked()
 {
-    if(mainPlayer->getMaterialList()->length() <= 0){   //
+    if(mainPlayer->getMaterialList()->length() <= 0)
         return;                         // No materials on Player Inventory
-    }                                   //
+    if(!ValidateSelectedMaterials()){
+        QMessageBox::warning(this, "Invalid material choice!", "You selected the same material for one or more material slots, please change one of the to another!");
+        return;
+    }
 
     int buildPrice = 0, sellPrice = 0;
     int currWeaponType = ui->comboBox->currentIndex();
@@ -67,3 +84,24 @@ void WeaponDesigner::on_pushButton_Cancel_clicked()
 }
 
 
+void WeaponDesigner::on_pushButton_Build_clicked(){
+    if(!ValidateSelectedMaterials()){
+        QMessageBox::warning(this, "Invalid material choice!", "You selected the same material for one or more material slots, please change one of the to another!");
+        return;
+    }
+
+    //Scan the selected materials from the list and add them to a pre-delete list. This needs to be done like this, since the material selection is index based
+    //So, removing while scanning changes the index.
+
+    QVector<WeaponMaterial*> selectedMat;
+    for(auto cb : materialsCB){
+        WeaponMaterial *cur = mainPlayer->getMaterialList()->at(cb->currentIndex());
+        selectedMat.append(cur);
+    }
+    for(auto mat : selectedMat){
+        mainPlayer->getMaterialList()->removeOne(mat);
+    }
+
+    //Refresh the weapon material UI
+    FillFormWithMaterialSelection(Weapon::IndexToWeaponType(ui->comboBox->currentIndex()));
+}

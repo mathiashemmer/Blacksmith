@@ -1,0 +1,15 @@
+INPUT(
+./release\main.o
+./release\maingame.o
+./release\weapon.o
+./release\weaponmaterial.o
+./release\weapondesigner.o
+./release\player.o
+./release\inventorymanager.o
+./release\materialanalizer.o
+./release\qrc_mainresources.o
+./release\moc_maingame.o
+./release\moc_weapondesigner.o
+./release\moc_inventorymanager.o
+./release\moc_materialanalizer.o
+);
