@@ -1,4 +1,6 @@
 INPUT(
+./release\qrc_resources.o
+./release\qrc_audiofiles.o
 ./release\main.o
 ./release\maingame.o
 ./release\weapon.o
@@ -7,7 +9,6 @@ INPUT(
 ./release\player.o
 ./release\inventorymanager.o
 ./release\materialanalizer.o
-./release\qrc_mainresources.o
 ./release\moc_maingame.o
 ./release\moc_weapondesigner.o
 ./release\moc_inventorymanager.o

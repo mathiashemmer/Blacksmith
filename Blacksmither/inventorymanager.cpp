@@ -15,6 +15,7 @@ InventoryManager::~InventoryManager()
 
 void InventoryManager::UpdateUI(){
     int rowIndex = 0;
+    ui->tableWidget_Weapons->clear();
     for(auto w : *mainPlayer->getMaterialList()){
         QTableWidgetItem *c1 = new QTableWidgetItem(WeaponMaterial::MapQualityToString(w->getQuality()), 1);
         QTableWidgetItem *c2 = new QTableWidgetItem(QString::number(w->getMyPrice()), 1);
@@ -32,4 +33,10 @@ void InventoryManager::on_tableWidget_Weapons_cellDoubleClicked(int row, int col
     MaterialAnalizer *matAnalizer = new MaterialAnalizer(this, selectedMaterial);
     matAnalizer->setWindowTitle("Material Inspector");
     matAnalizer->exec();
+}
+
+void InventoryManager::on_pushButton_trash_clicked(){
+    int selectedIndex = ui->tableWidget_Weapons->selectionModel()->selectedIndexes().at(0).row();
+    mainPlayer->getMaterialList()->removeAt(selectedIndex);
+    UpdateUI();
 }

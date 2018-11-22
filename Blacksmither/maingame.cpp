@@ -8,6 +8,8 @@ MainGame::MainGame(QWidget *parent) :QMainWindow(parent),ui(new Ui::MainGame){
     ui->setupUi(this);
     MainGame::showMaximized();
     mainPlayer = new Player();
+    so_Soundtrack = new QSound(":/WAV/medieval-tavern-music-by.wav");
+    so_Soundtrack->play();
 }
 
 MainGame::~MainGame(){

@@ -42,6 +42,7 @@ public:
             tableWidget_Weapons->setRowCount(2);
         tableWidget_Weapons->setObjectName(QStringLiteral("tableWidget_Weapons"));
         tableWidget_Weapons->setGeometry(QRect(20, 10, 451, 311));
+        tableWidget_Weapons->setEditTriggers(QAbstractItemView::NoEditTriggers);
         tableWidget_Weapons->setShowGrid(true);
         tableWidget_Weapons->setGridStyle(Qt::DotLine);
         tableWidget_Weapons->setCornerButtonEnabled(false);

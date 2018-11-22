@@ -1,4 +1,6 @@
 INPUT(
+./debug\qrc_resources.o
+./debug\qrc_audiofiles.o
 ./debug\main.o
 ./debug\maingame.o
 ./debug\weapon.o
@@ -7,7 +9,6 @@ INPUT(
 ./debug\player.o
 ./debug\inventorymanager.o
 ./debug\materialanalizer.o
-./debug\qrc_mainresources.o
 ./debug\moc_maingame.o
 ./debug\moc_weapondesigner.o
 ./debug\moc_inventorymanager.o

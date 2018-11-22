@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>WAV/hammering1.wav</file>
+        <file>WAV/hammering2.wav</file>
+        <file>WAV/medieval-tavern-music-by.wav</file>
+    </qresource>
+</RCC>

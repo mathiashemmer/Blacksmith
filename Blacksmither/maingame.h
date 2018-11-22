@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QVector>
+#include <QSound>
 
 #include <player.h>
 #include <weapon.h>
@@ -19,6 +20,7 @@ class MainGame : public QMainWindow
     Q_OBJECT
 private:
    Player *mainPlayer;
+   QSound *so_Soundtrack;
 
 public:
     explicit MainGame(QWidget *parent = nullptr);

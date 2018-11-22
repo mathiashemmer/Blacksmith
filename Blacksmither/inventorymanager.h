@@ -26,6 +26,8 @@ public:
 private slots:
     void on_tableWidget_Weapons_cellDoubleClicked(int row, int column);
 
+    void on_pushButton_trash_clicked();
+
 private:
     Ui::InventoryManager *ui;
 };

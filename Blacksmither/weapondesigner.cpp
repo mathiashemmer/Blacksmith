@@ -104,4 +104,6 @@ void WeaponDesigner::on_pushButton_Build_clicked(){
 
     //Refresh the weapon material UI
     FillFormWithMaterialSelection(Weapon::IndexToWeaponType(ui->comboBox->currentIndex()));
+
+    QSound::play(":/WAV/hammering1.wav");
 }

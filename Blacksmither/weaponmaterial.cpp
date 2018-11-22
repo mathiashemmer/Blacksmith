@@ -72,6 +72,7 @@ QString WeaponMaterial::MapTypeToString(MaterialType t){
     case 5: return "Steel";
     case 6: return "Gold";
     }
+    return "nullType";
 }
 
 QString WeaponMaterial::MapQualityToString(MaterialQuality q){
@@ -83,5 +84,6 @@ QString WeaponMaterial::MapQualityToString(MaterialQuality q){
     case 4: return "Purified";
     case 5: return "Pure";
     }
+    return "nullQuality";
 }
 

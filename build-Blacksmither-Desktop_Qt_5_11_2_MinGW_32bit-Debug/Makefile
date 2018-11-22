@@ -242,7 +242,9 @@ Makefile: ../Blacksmither/Blacksmither.pro C:/UserPrograms/5.11.2/mingw53_32/mks
 		../Blacksmither/Blacksmither.pro \
 		C:/UserPrograms/5.11.2/mingw53_32/lib/qtmaind.prl \
 		C:/UserPrograms/5.11.2/mingw53_32/lib/Qt5Widgets.prl \
+		C:/UserPrograms/5.11.2/mingw53_32/lib/Qt5Multimedia.prl \
 		C:/UserPrograms/5.11.2/mingw53_32/lib/Qt5Gui.prl \
+		C:/UserPrograms/5.11.2/mingw53_32/lib/Qt5Network.prl \
 		C:/UserPrograms/5.11.2/mingw53_32/lib/Qt5Core.prl
 	$(QMAKE) -o Makefile ..\Blacksmither\Blacksmither.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 C:/UserPrograms/5.11.2/mingw53_32/mkspecs/features/spec_pre.prf:
@@ -426,7 +428,9 @@ C:/UserPrograms/5.11.2/mingw53_32/mkspecs/features/lex.prf:
 ../Blacksmither/Blacksmither.pro:
 C:/UserPrograms/5.11.2/mingw53_32/lib/qtmaind.prl:
 C:/UserPrograms/5.11.2/mingw53_32/lib/Qt5Widgets.prl:
+C:/UserPrograms/5.11.2/mingw53_32/lib/Qt5Multimedia.prl:
 C:/UserPrograms/5.11.2/mingw53_32/lib/Qt5Gui.prl:
+C:/UserPrograms/5.11.2/mingw53_32/lib/Qt5Network.prl:
 C:/UserPrograms/5.11.2/mingw53_32/lib/Qt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\Blacksmither\Blacksmither.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
