@@ -87,3 +87,13 @@ QString WeaponMaterial::MapQualityToString(MaterialQuality q){
     return "nullQuality";
 }
 
+QString WeaponMaterial::MapQualityToStyleSheet(MaterialQuality q){
+    switch (q) {
+    case 1: return "color: rgb(200,200,200)";
+    case 2: return "color: rgb(255,255,255)";
+    case 3: return "color: rgb(35,100,255)";
+    case 4: return "color: rgb(150,50,255)";
+    case 5: return "color: rgb(255,180,50)";
+    }
+}
+

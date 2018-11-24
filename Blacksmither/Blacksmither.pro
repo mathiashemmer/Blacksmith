@@ -34,7 +34,8 @@ SOURCES += \
     weapondesigner.cpp \
     player.cpp \
     inventorymanager.cpp \
-    materialanalizer.cpp
+    materialanalizer.cpp \
+    soundmanager.cpp
 
 HEADERS += \
         maingame.h \
@@ -43,7 +44,8 @@ HEADERS += \
     weapondesigner.h \
     player.h \
     inventorymanager.h \
-    materialanalizer.h
+    materialanalizer.h \
+    soundmanager.h
 
 FORMS += \
         maingame.ui \

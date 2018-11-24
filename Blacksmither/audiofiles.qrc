@@ -2,6 +2,8 @@
     <qresource prefix="/">
         <file>WAV/hammering1.wav</file>
         <file>WAV/hammering2.wav</file>
-        <file>WAV/medieval-tavern-music-by.wav</file>
+        <file>WAV/medieval-music-french-folk.mp3</file>
+        <file>WAV/medieval-music-italian-salta.mp3</file>
+        <file>WAV/medieval-tavern-music-by.mp3</file>
     </qresource>
 </RCC>

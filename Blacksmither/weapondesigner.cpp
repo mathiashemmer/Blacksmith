@@ -8,7 +8,7 @@ WeaponDesigner::WeaponDesigner(QWidget *parent, Player *p) : QDialog(parent), ui
     ui->setupUi(this);
     this->mainPlayer = p;
     int currWeaponType = ui->comboBox->currentIndex();
-    FillFormWithMaterialSelection(Weapon::IndexToWeaponType(currWeaponType));
+    FillFormWithMaterialSelection(Weapon::MapTypeToMaterialCount((WeaponType)currWeaponType));
 }
 
 WeaponDesigner::~WeaponDesigner()
@@ -47,7 +47,7 @@ bool WeaponDesigner::ValidateSelectedMaterials(){
 void WeaponDesigner::on_comboBox_currentIndexChanged(const QString &arg1)
 {
     int currWeaponType = ui->comboBox->currentIndex();
-    FillFormWithMaterialSelection(Weapon::IndexToWeaponType(currWeaponType));
+    FillFormWithMaterialSelection(Weapon::MapTypeToMaterialCount((WeaponType)currWeaponType));
 }
 
 void WeaponDesigner::on_pushButton_Evaluate_clicked()
@@ -69,13 +69,22 @@ void WeaponDesigner::on_pushButton_Evaluate_clicked()
         qualityPerc += mainPlayer->getMaterialList()->at(materialIndex)->getQuality();
     }
 
-    qualityPerc = qualityPerc * 100 / (Weapon::IndexToWeaponType(currWeaponType)*MAX_QUALITY);
+    qualityPerc = qualityPerc * 100 / (Weapon::MapTypeToMaterialCount((WeaponType)currWeaponType)*MAX_QUALITY);
     WeaponQuality thisQuality = Weapon::MapQuality(qualityPerc);
     sellPrice = buildPrice * (2+(float)thisQuality)/4;
 
     ui->label_BuildPrice->setText(QString::number(buildPrice));
+    ui->label_BuildPrice->setStyleSheet("color: rgb(190, 190, 0)");
     ui->label_Quality->setText(Weapon::MapQualityToString(thisQuality));
+    ui->label_Quality->setStyleSheet(Weapon::MapQualityToStyleSheet(thisQuality));
     ui->label_SellPrice->setText(QString::number(sellPrice));
+    ui->label_SellPrice->setStyleSheet("color: rgb(190, 190, 0)");
+
+    QSoundEffect *soundEffect = new QSoundEffect(this);
+    soundEffect->setSource(QUrl::fromLocalFile(":/WAV/hammering2.wav"));
+    soundEffect->play();
+    QTimer::singleShot(500 + (rand()%200 - 100), soundEffect, SLOT(play()));
+    QTimer::singleShot(1000 + (rand()%200 - 100), soundEffect, SLOT(play()));
 }
 
 void WeaponDesigner::on_pushButton_Cancel_clicked()
@@ -103,7 +112,11 @@ void WeaponDesigner::on_pushButton_Build_clicked(){
     }
 
     //Refresh the weapon material UI
-    FillFormWithMaterialSelection(Weapon::IndexToWeaponType(ui->comboBox->currentIndex()));
+    FillFormWithMaterialSelection(Weapon::MapTypeToMaterialCount((WeaponType)ui->comboBox->currentIndex()));
 
-    QSound::play(":/WAV/hammering1.wav");
+    QSoundEffect *soundEffect = new QSoundEffect(this);
+    soundEffect->setSource(QUrl::fromLocalFile(":/WAV/hammering1.wav"));
+    soundEffect->play();
+    QTimer::singleShot(500 + (rand()%200 - 100), soundEffect, SLOT(play()));
+    QTimer::singleShot(1000 + (rand()%200 - 100), soundEffect, SLOT(play()));
 }

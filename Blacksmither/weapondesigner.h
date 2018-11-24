@@ -5,7 +5,8 @@
 #include <QVector>
 #include <QComboBox>
 #include <QMessageBox>
-#include <QSound>
+#include <QSoundEffect>
+#include <QTimer>
 
 #include <player.h>
 #include <weaponmaterial.h>

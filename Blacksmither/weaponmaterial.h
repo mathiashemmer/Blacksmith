@@ -25,6 +25,7 @@ public:
 
     static QString MapTypeToString(MaterialType t);
     static QString MapQualityToString(MaterialQuality q);
+    static QString MapQualityToStyleSheet(MaterialQuality q);
     static int MapTypeToValue(MaterialType t);
 
     // Getters and Setters

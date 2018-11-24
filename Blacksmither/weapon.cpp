@@ -1,7 +1,7 @@
 #include "weapon.h"
 
-Weapon::Weapon(int weaponType, QVector<WeaponMaterial*> materials){
-    this->setWeaponType(Weapon::IndexToWeaponType(weaponType)); // Assign the weapon type
+Weapon::Weapon(WeaponType weaponType, QVector<WeaponMaterial*> materials){
+    this->setWeaponType(weaponType); // Assign the weapon type
     if(materials.length() > this->weaponType){
         // If the passed material list is greater than the accepted by the weapon, this should throw some kind of error
         materials.resize(this->weaponType); // For now, it just ignores the excess materials, discarding them
@@ -87,7 +87,7 @@ void Weapon::CalculateBasePrice(){
     this->setBasePrice(currPrice);
 }
 
-WeaponType Weapon::IndexToWeaponType(int i)
+WeaponType Weapon::MapIndexToWeaponType(int i)
 {
     switch (i) {
     case 0: return WeaponType::oneHandedSword;
@@ -95,6 +95,15 @@ WeaponType Weapon::IndexToWeaponType(int i)
     case 2: return WeaponType::oneHandedAxe;
     }
     return WeaponType::oneHandedSword;
+}
+
+int Weapon::MapTypeToMaterialCount(WeaponType t){
+    switch (t) {
+    case 0: return 3;
+    case 1: return 4;
+    case 2: return 2;
+    }
+    return 3;
 }
 
 WeaponQuality Weapon::MapQuality(int perc)
@@ -128,4 +137,17 @@ QString Weapon::MapQualityToString(WeaponQuality q)
         case 7: return "Titleworthy";
     }
     return "Bad";
+}
+
+QString Weapon::MapQualityToStyleSheet(WeaponQuality q){
+    switch (q) {
+    case 1: return "color: rgb(100,100,100)";
+    case 2: return "color: rgb(150,150,150)";
+    case 3: return "color: rgb(200,200,200)";
+    case 4: return "color: rgb(35,100,255)";
+    case 5: return "color: rgb(150,50,255)";
+    case 6: return "color: rgb(255,50,150)";
+    case 7: return "color: rgb(255,180,50)";
+    }
+    return "color: rgb(255,255,255)";
 }

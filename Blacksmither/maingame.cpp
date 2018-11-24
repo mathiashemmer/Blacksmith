@@ -1,15 +1,17 @@
 #include "maingame.h"
 #include "ui_maingame.h"
-#include <QMessageBox>
+
 
 WeaponMaterial* GatherMaterials(int);
 
 MainGame::MainGame(QWidget *parent) :QMainWindow(parent),ui(new Ui::MainGame){
     ui->setupUi(this);
     MainGame::showMaximized();
+
     mainPlayer = new Player();
-    so_Soundtrack = new QSound(":/WAV/medieval-tavern-music-by.wav");
-    so_Soundtrack->play();
+    mainSound = new SoundManager();
+
+    ui->label->setText("Actions left: " + QString::number(mainPlayer->getActionsLeft()) + " / 6");
 }
 
 MainGame::~MainGame(){
@@ -69,4 +71,16 @@ WeaponMaterial* GatherMaterials(int gatherSkill){
 void MainGame::on_pushButton_Inventory_clicked(){
     InventoryManager *invManager = new InventoryManager(this, this->mainPlayer);
     invManager->exec();
+}
+
+void MainGame::on_horizontalSlider_sliderMoved(int position){
+    mainSound->SetVolume(position);
+}
+
+void MainGame::on_pushButton_pauseMusic_clicked(){
+    mainSound->PauseCurrent();
+}
+
+void MainGame::on_pushButton_nextMusic_clicked(){
+    mainSound->NextSoundtrack();
 }

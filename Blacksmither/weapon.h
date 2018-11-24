@@ -6,7 +6,7 @@
 
 enum WeaponQuality {bad = 1, usable, common, nice, epic, legendary, titleworthy};
 // Map material ammount to weapon type
-enum WeaponType {oneHandedSword = 3, twoHandedSword = 4, oneHandedAxe = 2};
+enum WeaponType {oneHandedSword, twoHandedSword, oneHandedAxe};
 
 class Weapon {
 private:
@@ -17,16 +17,18 @@ private:
 
     QVector<WeaponMaterial*> mainMaterials;
 public:
-    Weapon(int weaponType, QVector<WeaponMaterial*> materials);
+    Weapon(WeaponType weaponType, QVector<WeaponMaterial*> materials);
     ~Weapon();
 
     void CalculateQuality();
     void CalculateBasePrice();
 
-    static WeaponType IndexToWeaponType(int i);
+    static WeaponType MapIndexToWeaponType(int i);
+    static int MapTypeToMaterialCount(WeaponType t);
 
     static WeaponQuality MapQuality(int perc);
     static QString MapQualityToString(WeaponQuality q);
+    static QString MapQualityToStyleSheet(WeaponQuality q);
 
     // Getters and Setters
     WeaponQuality getWeaponQuality() const;

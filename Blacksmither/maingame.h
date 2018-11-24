@@ -3,9 +3,10 @@
 
 #include <QMainWindow>
 #include <QVector>
-#include <QSound>
+#include <QMessageBox>
 
 #include <player.h>
+#include <soundmanager.h>
 #include <weapon.h>
 #include <weaponmaterial.h>
 #include <weapondesigner.h>
@@ -19,9 +20,8 @@ class MainGame : public QMainWindow
 {
     Q_OBJECT
 private:
-   Player *mainPlayer;
-   QSound *so_Soundtrack;
-
+    Player *mainPlayer;
+    SoundManager *mainSound;
 public:
     explicit MainGame(QWidget *parent = nullptr);
     ~MainGame();
@@ -33,6 +33,9 @@ private slots:
     void on_pushButton_NewTool_clicked();
     void on_pushButton_GetterMaterials_clicked();
     void on_pushButton_Inventory_clicked();
+    void on_horizontalSlider_sliderMoved(int position);
+    void on_pushButton_pauseMusic_clicked();
+    void on_pushButton_nextMusic_clicked();
 
 private:
     Ui::MainGame *ui;
