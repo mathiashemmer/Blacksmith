@@ -1,8 +1,9 @@
 <RCC>
     <qresource prefix="/">
-        <file>ICO/Bag.png</file>
-        <file>ICO/Gather.png</file>
-        <file>ICO/Hammer.png</file>
-        <file>ICO/oneHadedSword.png</file>
+        <file>ICO/explore.png</file>
+        <file>ICO/inventory.png</file>
+        <file>ICO/load.png</file>
+        <file>ICO/newtool.png</file>
+        <file>ICO/save.png</file>
     </qresource>
 </RCC>

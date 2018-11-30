@@ -35,7 +35,11 @@ SOURCES += \
     player.cpp \
     inventorymanager.cpp \
     materialanalizer.cpp \
-    soundmanager.cpp
+    soundmanager.cpp \
+    serializavel.cpp \
+    expeditionmanager.cpp \
+    expeditionevent.cpp \
+    expeditionlocal.cpp
 
 HEADERS += \
         maingame.h \
@@ -45,13 +49,18 @@ HEADERS += \
     player.h \
     inventorymanager.h \
     materialanalizer.h \
-    soundmanager.h
+    soundmanager.h \
+    serializavel.h \
+    expeditionmanager.h \
+    expeditionevent.h \
+    expeditionlocal.h
 
 FORMS += \
         maingame.ui \
     weapondesigner.ui \
     inventorymanager.ui \
-    materialanalizer.ui
+    materialanalizer.ui \
+    expeditionmanager.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -11,6 +11,7 @@ private:
     int skillGatherer;
     int playerMoney;
     int actionsLeft;
+    int gold;
 
     QVector<Weapon*> weaponList;
     QVector<WeaponMaterial*> materialList;
@@ -28,6 +29,9 @@ public:
     void setEquipedWeapon(Weapon *value);
     int getActionsLeft() const;
     void setActionsLeft(int value);
+    int getGold() const;
+    void addGold(int value);
+    void setGold(int value);
 };
 
 #endif // PLAYER_H

@@ -1,29 +1,25 @@
 #ifndef WEAPON_H
 #define WEAPON_H
 
+#include <serializavel.h>
 #include <QVector>
 #include <weaponmaterial.h>
 
 enum WeaponQuality {bad = 1, usable, common, nice, epic, legendary, titleworthy};
-// Map material ammount to weapon type
-enum WeaponType {oneHandedSword, twoHandedSword, oneHandedAxe};
+enum WeaponType {oneHandedSword, twoHandedSword, oneHandedAxe, twoHandedAxe, club, polearm, spear, dagger, knife, oneHandedHammer, twoHandedHammer};
 
-class Weapon {
+class Weapon : public Serializavel {
 private:
     WeaponQuality weaponQuality;
     WeaponType weaponType;
     int basePrice;
     int sellPrice;
-
-    QVector<WeaponMaterial*> mainMaterials;
+    QVector<int> materialsID;
 public:
     Weapon(WeaponType weaponType, QVector<WeaponMaterial*> materials);
     ~Weapon();
 
-    void CalculateQuality();
-    void CalculateBasePrice();
-
-    static WeaponType MapIndexToWeaponType(int i);
+    static QString MapWeaponTypeToString(WeaponType i);
     static int MapTypeToMaterialCount(WeaponType t);
 
     static WeaponQuality MapQuality(int perc);
@@ -39,8 +35,9 @@ public:
     void setSellPrice(int value);
     WeaponType getWeaponType() const;
     void setWeaponType(const WeaponType &value);
-    QVector<WeaponMaterial*> getMainMaterials() const;
-    void setMainMaterials(const QVector<WeaponMaterial*> &value);
+
+    bool Serializar(QTextStream *stream);
+    bool Deserializar(QTextStream *stream);
 };
 
 #endif // WEAPON_H

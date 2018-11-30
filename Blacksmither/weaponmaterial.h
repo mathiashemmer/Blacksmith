@@ -1,32 +1,36 @@
 #ifndef WEAPONMATERIAL_H
 #define WEAPONMATERIAL_H
 
+#include <serializavel.h>
 #include <QString>
 #include <QFile>
 
 #define MAX_QUALITY 5 // Update this value if more qualitys are added
 
-enum MaterialType {wood = 1, copper, iron, bronze, steel, gold};
-enum MaterialQuality {mixture = 1, impure, neutral, purified, pure};
+enum MaterialType {nullMaterialId, wood, copper, iron, bronze, steel, gold};
+enum MaterialQuality {nullidMaterialQualityId, mixture, impure, neutral, purified, pure};
 
-class WeaponMaterial
+class WeaponMaterial : public Serializavel
 {
 private:
+    int ID;
     int myPrice;
+
+    QString materialIconPath;
 
     MaterialType myType;
     MaterialQuality quality;
-
-    QString materialName;
-    QString materialIconPath;
 public:
     WeaponMaterial();
-    WeaponMaterial(MaterialType type, MaterialQuality quality, int price, QString name);
+    WeaponMaterial(MaterialType type, MaterialQuality quality, int price);
+
 
     static QString MapTypeToString(MaterialType t);
     static QString MapQualityToString(MaterialQuality q);
     static QString MapQualityToStyleSheet(MaterialQuality q);
     static int MapTypeToValue(MaterialType t);
+
+    static int GetMaxQuality();
 
     // Getters and Setters
     MaterialType getMyType() const;
@@ -35,10 +39,12 @@ public:
     void setQuality(const MaterialQuality &value);
     int getMyPrice() const;
     void setMyPrice(int value);
-    QString getMaterialName() const;
-    void setMaterialName(const QString &value);
     QString getMaterialIconPath() const;
     void setMaterialIconPath(const QString &value);
+
+    //Serializable
+    bool Serializar(QTextStream *dataStream);
+    bool Deserializar(QTextStream *dataStream);
 };
 
 #endif // WEAPONMATERIAL_H

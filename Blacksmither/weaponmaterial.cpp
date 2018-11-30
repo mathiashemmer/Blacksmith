@@ -30,16 +30,6 @@ void WeaponMaterial::setMyPrice(int value)
     myPrice = value;
 }
 
-QString WeaponMaterial::getMaterialName() const
-{
-    return materialName;
-}
-
-void WeaponMaterial::setMaterialName(const QString &value)
-{
-    materialName = value;
-}
-
 QString WeaponMaterial::getMaterialIconPath() const
 {
     return materialIconPath;
@@ -50,16 +40,38 @@ void WeaponMaterial::setMaterialIconPath(const QString &value)
     materialIconPath = value;
 }
 
+bool WeaponMaterial::Serializar(QTextStream *dataStream){
+    *dataStream << QString::number(this->getMyPrice()) << ";";
+    *dataStream << QString::number(this->getMyType()) << ";";
+    *dataStream << QString::number(this->getQuality()) << ";";
+    *dataStream << this->getMaterialIconPath() << ";\r\n";
+    return true;
+}
+
+bool WeaponMaterial::Deserializar(QTextStream *dataStream){
+    QString textData = dataStream->readLine();
+    QStringList segmentedData = textData.split(";");
+
+    this->setMyPrice(segmentedData[0].toInt());
+    this->setMyType((MaterialType)segmentedData[1].toInt());
+    this->setQuality((MaterialQuality)segmentedData[2].toInt());
+    this->setMaterialIconPath(segmentedData[3]);
+    return true;
+
+}
+
+
+
 WeaponMaterial::WeaponMaterial()
 {
     
 }
 
-WeaponMaterial::WeaponMaterial(MaterialType type, MaterialQuality quality, int price, QString name){
+WeaponMaterial::WeaponMaterial(MaterialType type, MaterialQuality quality, int price)
+{
     this->setMyType(type);
     this->setQuality(quality);
     this->setMyPrice(price);
-    this->setMaterialName(name);
 }
 
 QString WeaponMaterial::MapTypeToString(MaterialType t){
@@ -71,8 +83,8 @@ QString WeaponMaterial::MapTypeToString(MaterialType t){
     case 4: return "Bronze";
     case 5: return "Steel";
     case 6: return "Gold";
+    default: return "NullType";
     }
-    return "nullType";
 }
 
 QString WeaponMaterial::MapQualityToString(MaterialQuality q){
@@ -83,8 +95,8 @@ QString WeaponMaterial::MapQualityToString(MaterialQuality q){
     case 3: return "Neutral";
     case 4: return "Purified";
     case 5: return "Pure";
+    default: return "nullQuality";
     }
-    return "nullQuality";
 }
 
 QString WeaponMaterial::MapQualityToStyleSheet(MaterialQuality q){
@@ -94,6 +106,11 @@ QString WeaponMaterial::MapQualityToStyleSheet(MaterialQuality q){
     case 3: return "color: rgb(35,100,255)";
     case 4: return "color: rgb(150,50,255)";
     case 5: return "color: rgb(255,180,50)";
+    default: return "";
     }
+}
+
+int WeaponMaterial::GetMaxQuality(){
+    return 5;
 }
 

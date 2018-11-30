@@ -50,7 +50,25 @@ QVector<WeaponMaterial *> *Player::getMaterialList()
     return &materialList;
 }
 
+int Player::getGold() const
+{
+    return gold;
+}
+
+void Player::addGold(int value)
+{
+    gold += value;
+}
+
+void Player::setGold(int value)
+{
+    gold = value;
+}
+
 Player::Player(){
+    materialList.clear();
+    weaponList.clear();
+    this->setGold(0);
     this->setPlayerMoney(0);
     this->setSkillGatherer(1);
     this->setActionsLeft(6);

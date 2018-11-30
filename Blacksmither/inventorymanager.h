@@ -28,6 +28,8 @@ private slots:
 
     void on_pushButton_trash_clicked();
 
+    void on_pushButton_trash_2_clicked();
+
 private:
     Ui::InventoryManager *ui;
 };

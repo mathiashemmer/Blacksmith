@@ -119,4 +119,8 @@ void WeaponDesigner::on_pushButton_Build_clicked(){
     soundEffect->play();
     QTimer::singleShot(500 + (rand()%200 - 100), soundEffect, SLOT(play()));
     QTimer::singleShot(1000 + (rand()%200 - 100), soundEffect, SLOT(play()));
+
+    int currWeaponType = ui->comboBox->currentIndex();
+    Weapon *newWeapon = new Weapon((WeaponType)currWeaponType, selectedMat);
+    mainPlayer->getWeaponList()->append(newWeapon);
 }
