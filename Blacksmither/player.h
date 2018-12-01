@@ -5,11 +5,10 @@
 #include <weapon.h>
 #include <weaponmaterial.h>
 
-class Player
+class Player : public Serializavel
 {
 private:
     int skillGatherer;
-    int playerMoney;
     int actionsLeft;
     int gold;
 
@@ -19,8 +18,11 @@ private:
     Weapon *equipedWeapon;
 public:
     Player();
-    int getPlayerMoney() const;
-    void setPlayerMoney(int value);
+    ~Player();
+
+    bool Serializar(QTextStream *stream);
+    bool Deserializar(QTextStream *stream);
+
     int getSkillGatherer() const;
     void setSkillGatherer(int value);
     QVector<Weapon *>* getWeaponList();
@@ -28,6 +30,7 @@ public:
     Weapon *getEquipedWeapon() const;
     void setEquipedWeapon(Weapon *value);
     int getActionsLeft() const;
+    void addActionsLeft(int value);
     void setActionsLeft(int value);
     int getGold() const;
     void addGold(int value);

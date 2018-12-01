@@ -8,12 +8,14 @@ class SoundManager
 {
 private:
     int currentSoundTrackIndex = 0;
-    bool isPaused = true;
+    bool isPaused = false;
     QMediaPlayer *mainPlayer;
+    QMediaPlaylist *gameMusic;
 public:
     SoundManager();
     ~SoundManager();
 
+    void ResetPlayList();
     void NextSoundtrack();
     void PauseCurrent();
     void SetVolume(int vol);

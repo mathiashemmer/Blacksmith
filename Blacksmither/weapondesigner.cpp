@@ -123,4 +123,5 @@ void WeaponDesigner::on_pushButton_Build_clicked(){
     int currWeaponType = ui->comboBox->currentIndex();
     Weapon *newWeapon = new Weapon((WeaponType)currWeaponType, selectedMat);
     mainPlayer->getWeaponList()->append(newWeapon);
+    mainPlayer->addActionsLeft(-1);
 }

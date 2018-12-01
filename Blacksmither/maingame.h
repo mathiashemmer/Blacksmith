@@ -49,6 +49,8 @@ private slots:
 
     void on_pushButton_SaveGame_clicked();
 
+    void on_pushButton_LoadGame_clicked();
+
 private:
     Ui::MainGame *ui;
 };

@@ -16,6 +16,7 @@ private:
     int sellPrice;
     QVector<int> materialsID;
 public:
+    Weapon();
     Weapon(WeaponType weaponType, QVector<WeaponMaterial*> materials);
     ~Weapon();
 

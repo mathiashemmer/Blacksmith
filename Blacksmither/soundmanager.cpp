@@ -22,12 +22,13 @@ void SoundManager::setMainPlayer(QMediaPlayer *value)
 
 SoundManager::SoundManager(){
     mainPlayer = new QMediaPlayer();
-    mainPlayer->setMedia(QUrl("qrc:/WAV/medieval-tavern-music-by.mp3"));
-    QMediaPlaylist *gameMusic = new QMediaPlaylist();
-    gameMusic->setPlaybackMode(QMediaPlaylist::Loop);
+    gameMusic = new QMediaPlaylist();
+
     gameMusic->addMedia(QUrl("qrc:/WAV/medieval-music-french-folk.mp3"));
     gameMusic->addMedia(QUrl("qrc:/WAV/medieval-music-italian-salta.mp3"));
     gameMusic->addMedia(QUrl("qrc:/WAV/medieval-tavern-music-by.mp3"));
+
+    gameMusic->setPlaybackMode(QMediaPlaylist::Loop);
     gameMusic->setCurrentIndex(1);
     mainPlayer->setPlaylist(gameMusic);
     mainPlayer->play();
@@ -35,6 +36,14 @@ SoundManager::SoundManager(){
 
 SoundManager::~SoundManager(){
 
+}
+
+void SoundManager::ResetPlayList(){
+    mainPlayer->pause();
+    mainPlayer->setPlaylist(gameMusic);
+    gameMusic->setCurrentIndex(1);
+    if(!isPaused)
+        mainPlayer->play();
 }
 
 void SoundManager::NextSoundtrack(){

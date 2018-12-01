@@ -1,9 +1,6 @@
 #include "maingame.h"
 #include "ui_maingame.h"
 
-
-WeaponMaterial* GatherMaterials(int);
-
 MainGame::MainGame(QWidget *parent) :QMainWindow(parent),ui(new Ui::MainGame){
     ui->setupUi(this);
     MainGame::showMaximized();
@@ -11,11 +8,13 @@ MainGame::MainGame(QWidget *parent) :QMainWindow(parent),ui(new Ui::MainGame){
     mainPlayer = new Player();
     mainSound = new SoundManager();
 
-    ui->label->setText("Actions left: " + QString::number(mainPlayer->getActionsLeft()) + " / 6");
-    ui->label_Gold->setText("Gold : 0");
-
     buffAmmount = 0;
     debuffAmmount = 0;
+
+    mainPlayer->setGold(100);
+
+    ui->label->setText("Actions left: " + QString::number(mainPlayer->getActionsLeft()) + " / 6");
+    ui->label_Gold->setText("Gold: " + QString::number(mainPlayer->getGold()));
 }
 
 MainGame::~MainGame(){
@@ -24,6 +23,8 @@ MainGame::~MainGame(){
 
 void MainGame::EndDay(){
     int unusedAction = mainPlayer->getActionsLeft();
+    bool soldSomething = false;
+    int ammountEarned = 0;
     float baseSellChance = 20;
 
     auto playerWeaponList = mainPlayer->getWeaponList();
@@ -55,22 +56,48 @@ void MainGame::EndDay(){
     // Sell select weapons
     for(auto w : soldWeapons){
         mainPlayer->addGold(w->getSellPrice());
+        soldSomething = true;
+        ammountEarned += w->getSellPrice();
         delete(w);
     }
+    if(soldSomething)
+        QMessageBox::warning(this, "You Sold Something!", "Today was a good day, and you sold stuff. Earnend " + QString::number(ammountEarned) + " gold.");
+    else
+        QMessageBox::warning(this, "A Sad Day...", "You sold nothing today... Maybe tomorrow?");
+
+    int goldLost = rand() % 10 + rand() % 5 * rand() % 10;
+    QMessageBox::warning(this, "Daily Payout", "You pay your rents, your living cost, and stuff for your family. Today you lost " + QString::number(goldLost) + " gold.");
+    mainPlayer->addGold(-goldLost);
 
     //Reset stuff for the next day
-    ui->label->setText("Actions left: " + QString::number(mainPlayer->getActionsLeft()) + " / 6");
-    ui->label_Gold->setText("Gold: " + QString::number(mainPlayer->getGold()));
     mainPlayer->setActionsLeft(6);
     buffAmmount = 0;
     debuffAmmount = 0;
     buffRange.clear();
     debuffRange.clear();
+    ui->label->setText("Actions left: " + QString::number(mainPlayer->getActionsLeft()) + " / 6");
+    ui->label_Gold->setText("Gold: " + QString::number(mainPlayer->getGold()));
+
+    if(mainPlayer->getGold() <= 0){
+        ui->pushButton_EndDay->setDisabled(true);
+        ui->pushButton_GetterMaterials->setDisabled(true);
+        ui->pushButton_Inventory->setDisabled(true);
+        ui->pushButton_NewTool->setDisabled(true);
+        QMessageBox::warning(this, "You Lost", "No money, no food, no energy... Try reloading or starting a new game.");
+    }
 }
 
 void MainGame::on_pushButton_NewTool_clicked(){
+    if(mainPlayer->getActionsLeft() <= 0){
+        QMessageBox::warning(this, "No Actions Left", "You ran out of actions for today, end this day and sleep...");
+        return;
+    }
     WeaponDesigner *DesignerWindow = new WeaponDesigner(this, mainPlayer);
     DesignerWindow->exec();
+    delete DesignerWindow;
+
+    ui->label->setText("Actions left: " + QString::number(mainPlayer->getActionsLeft()) + " / 6");
+    ui->label_Gold->setText("Gold: " + QString::number(mainPlayer->getGold()));
 }
 
 
@@ -78,42 +105,16 @@ void MainGame::on_pushButton_NewTool_clicked(){
 // Gathering events go here. Will change the logic later, for now its just the basics         //
 // ========================================================================================== //
 void MainGame::on_pushButton_GetterMaterials_clicked(){
-    WeaponMaterial *mat = GatherMaterials(1);
-    if(mat != nullptr)
-        mainPlayer->getMaterialList()->append(mat);
-}
-
-WeaponMaterial* GatherMaterials(int gatherSkill){
-    WeaponMaterial *foundMaterial = nullptr;
-    expeditionmanager *man = new expeditionmanager();
-    man->exec();
-
-    QMessageBox *mainEvent = new QMessageBox(nullptr);
-    mainEvent->setText("As you leave your shop, you wander where should you look por resources...");
-    mainEvent->addButton("Forest", QMessageBox::ButtonRole::ActionRole);
-    mainEvent->addButton("Mines", QMessageBox::ButtonRole::ActionRole);
-    mainEvent->addButton("Lake", QMessageBox::ButtonRole::ActionRole);
-    mainEvent->addButton("Forget it, just leave...", QMessageBox::ButtonRole::ActionRole);
-    int eventID = mainEvent->exec();
-    switch (eventID) {
-    case 0: // Forest
-        foundMaterial = new WeaponMaterial(
-                    (MaterialType)(rand() % 6 + 1),
-                    (MaterialQuality)(rand() % 5 + 1),
-                    25 * rand() % 6);
-        foundMaterial->setMaterialIconPath(":/ICO/Hammer.png");
-        QMessageBox::warning(nullptr, "Found!", "You found a <b>" +
-                             WeaponMaterial::MapQualityToString(foundMaterial->getQuality()) + " " +
-                             WeaponMaterial::MapTypeToString(foundMaterial->getMyType()) + "</b>!It is in your bag to use!");
-        break;
-    case 1: // Mines
-        break;
-    case 2: // Lake
-        break;
-    case 3: // Leave
-        break;
+    if(mainPlayer->getActionsLeft() <= 0){
+        QMessageBox::warning(this, "No Actions Left", "You ran out of actions for today, end this day and sleep...");
+        return;
     }
-    return foundMaterial;
+    expeditionmanager *man = new expeditionmanager(this, mainPlayer, mainSound);
+    man->exec();
+    delete man;
+
+    ui->label->setText("Actions left: " + QString::number(mainPlayer->getActionsLeft()) + " / 6");
+    ui->label_Gold->setText("Gold: " + QString::number(mainPlayer->getGold()));
 }
 
 void MainGame::on_pushButton_Inventory_clicked(){
@@ -139,11 +140,54 @@ void MainGame::on_pushButton_EndDay_clicked(){
 
 void MainGame::on_pushButton_SaveGame_clicked()
 {
-    QFile baga("teste.txt");
-    baga.open(QIODevice::ReadWrite);
-
-    QTextStream *dataStream = new QTextStream(&baga);
+    QFile playerItens("GameData/PlayerItens.txt");
+    playerItens.open(QIODevice::ReadWrite | QIODevice::Truncate);
+    QTextStream dataStream(&playerItens);
     for(auto mat : *mainPlayer->getMaterialList()){
-        mat->Serializar(dataStream);
+        mat->Serializar(&dataStream);
     }
+
+    QFile playerWeapons("GameData/PlayerWeapons.txt");
+    playerWeapons.open(QIODevice::ReadWrite | QIODevice::Truncate);
+    dataStream.setDevice(&playerWeapons);
+    for(auto weap : *mainPlayer->getWeaponList()){
+        weap->Serializar(&dataStream);
+    }
+
+    QFile playerData("GameData/PlayerData.txt");
+    playerData.open(QIODevice::ReadWrite | QIODevice::Truncate);
+    dataStream.setDevice(&playerData);
+    mainPlayer->Serializar(&dataStream);
+
+    QMessageBox::warning(this, "Save Sucessfull", "Data Saved from device.");
+}
+
+void MainGame::on_pushButton_LoadGame_clicked(){
+    QFile playerItens("GameData/PlayerItens.txt");
+    playerItens.open(QIODevice::ReadOnly);
+    QTextStream dataStream(&playerItens);
+    while(!dataStream.atEnd()){
+        WeaponMaterial *newMat = new WeaponMaterial();
+        newMat->Deserializar(&dataStream);
+        mainPlayer->getMaterialList()->append(newMat);
+    }
+
+    QFile playerWeapons("GameData/PlayerWeapons.txt");
+    playerWeapons.open(QIODevice::ReadOnly);
+    dataStream.setDevice(&playerWeapons);
+    while(!dataStream.atEnd()){
+        Weapon *newWeap = new Weapon();
+        newWeap->Deserializar(&dataStream);
+        mainPlayer->getWeaponList()->append(newWeap);
+    }
+
+    QFile playerData("GameData/PlayerData.txt");
+    playerData.open(QIODevice::ReadOnly);
+    dataStream.setDevice(&playerData);
+    mainPlayer->Deserializar(&dataStream);
+
+    ui->label->setText("Actions left: " + QString::number(mainPlayer->getActionsLeft()) + " / 6");
+    ui->label_Gold->setText("Gold: " + QString::number(mainPlayer->getGold()));
+
+    QMessageBox::warning(this, "Load Sucessfull", "Data loaded from device.");
 }

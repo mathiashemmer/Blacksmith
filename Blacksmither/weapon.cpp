@@ -1,5 +1,9 @@
 #include "weapon.h"
 
+Weapon::Weapon(){
+
+}
+
 Weapon::Weapon(WeaponType weaponType, QVector<WeaponMaterial*> materials){
     this->basePrice = 0;
     this->sellPrice = 0;
