@@ -30,7 +30,7 @@
      <string>One Handed Sword</string>
     </property>
     <property name="icon">
-     <iconset resource="mainresources.qrc">
+     <iconset>
       <normaloff>:/ICO/oneHadedSword.png</normaloff>:/ICO/oneHadedSword.png</iconset>
     </property>
    </item>
@@ -42,6 +42,46 @@
    <item>
     <property name="text">
      <string>One Handed Axe</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>twoHandedAxe</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>club</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>polearm</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>spear</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Dagger</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>knife</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>One Handed Hammer</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Two Handed Hammer</string>
     </property>
    </item>
   </widget>
@@ -176,8 +216,6 @@
    </property>
   </widget>
  </widget>
- <resources>
-  <include location="mainresources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

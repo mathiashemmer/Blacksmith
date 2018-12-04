@@ -1,0 +1,14 @@
+Sweet Home;-1;-1;-1;Woods;Lake;You arrive at the front door, looking through the woods, glancing over the lake. You wonder where should you go from here...
+Woods;-1;-1;-1;Deep Shadows;Long Leaf;You walk towards the woods, hoping to find something interesting. The light breeze goes through your face, making you feel chilly.
+Deep Shadows;-1;-1;-1;The Cracked Stump;The Old Barn;Feeling adventurous, you make your way to the Deep Shadows, a hostile but resourcefull path between the mountain and the woods. Upon entering, you feel a dark presence overseen you. Cracling sounds and walking noise can be heard.
+The Cracked Stump;-1;-1;-1;Down The Stump 1;a;As you wander throung the Deep Shadows, you find yourself looking at a Cracked Stump. But not just a stump, the old once-tree spans for 6 meters, being almost 3 meters tall. You can feel the dark presence behind you. Should you enter the stump, or go back?
+Down The Stump 1;-1;-1;-1;Down The Stump 2;a;You enter Down The Sump. The light is getting thin, and you feel a hot steam of air comming from down below.
+Down The Stump 2;-1;-1;-1;Down The Stump 3;a;You keep walking down the stump, as to hole get steeper and steeper. The air now is getting hard to breath, and there is noo wood left, just wet earth and worms. Keep going down?
+Down The Stump 3;-1;-1;-1;The Door;Put Out The Flame;After an hour descending the steep hole, you reach the botton. There is just a door, and a small candle, lit with a blue flame. The light emmited from the flame is green, and cold.
+The Door;-1;-1;-1;a;a;a
+Put Out The Flame;-1;-1;-1;a;a;a
+The Old Barn;-1;-1;-1;The Old Barn 1;a;You walk to an Old Barn. The wood planks that make the walls are rotten and wet. The barn is four stores tall, quite a big one. No animals or farming equipment in sight. Enter the barn?
+The Old Barn 1;-1;-1;-1;The Old Barn 2;a;As you enter the barn, the sun starts to turn red. The atmosphere is getting creepy, and you wonder if you should go back home... Keep climbing the stairs up?
+The Old Barn 2;-1;-1;-1;a;a;a
+Long Leaf;-1;-1;-1;a;a;a
+Lake;-1;-1;-1;a;a;a
