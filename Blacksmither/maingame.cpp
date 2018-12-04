@@ -85,6 +85,34 @@ void MainGame::EndDay(){
         ui->pushButton_NewTool->setDisabled(true);
         QMessageBox::warning(this, "You Lost", "No money, no food, no energy... Try reloading or starting a new game.");
     }
+
+    int buffRoll = rand() % 100;
+    if(buffRoll > 40){
+        buffRoll = rand() % 100;
+        int debuffRoll = rand() % 100;
+
+        if(buffRoll > 50){ //buff
+            int range = rand() % 6;
+            for(int i = 0; i > range; i++){
+                int bfR = rand() % 8;
+                int bfA = rand() % 30;
+
+                QMessageBox::warning(this, "Buff on", "Today " + Weapon::MapWeaponTypeToString(WeaponType(bfA)) + "with " + QString::number(bfA) + "chance of selling");
+                buffAmmount = bfA;
+                buffRange.append(bfR);
+            }
+        }if(debuffRoll > 50){ // debuff
+            int range = rand() % 6;
+            for(int i = 0; i > range; i++){
+                int bfR = rand() % 8;
+                int bfA = rand() % 30;
+
+                QMessageBox::warning(this, "debuff on", "Today " + Weapon::MapWeaponTypeToString(WeaponType(bfA)) + "with " + QString::number(bfA) + "chance of selling");
+                debuffAmmount = bfA;
+                debuffRange.append(bfR);
+            }
+        }
+    }
 }
 
 void MainGame::on_pushButton_NewTool_clicked(){

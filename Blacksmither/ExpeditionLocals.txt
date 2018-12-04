@@ -9,6 +9,8 @@ The Door;-1;-1;-1;a;a;a
 Put Out The Flame;-1;-1;-1;a;a;a
 The Old Barn;-1;-1;-1;The Old Barn 1;a;You walk to an Old Barn. The wood planks that make the walls are rotten and wet. The barn is four stores tall, quite a big one. No animals or farming equipment in sight. Enter the barn?
 The Old Barn 1;-1;-1;-1;The Old Barn 2;a;As you enter the barn, the sun starts to turn red. The atmosphere is getting creepy, and you wonder if you should go back home... Keep climbing the stairs up?
-The Old Barn 2;-1;-1;-1;a;a;a
+The Old Barn 2;-1;-1;-1;Baga;a;asdasdas
 Long Leaf;-1;-1;-1;a;a;a
 Lake;-1;-1;-1;a;a;a
+Baga;-1;-1;-1;a;a;a
+
